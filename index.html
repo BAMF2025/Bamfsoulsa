@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BAMF SOULSA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f3f3f3;
+      color: #1a1a1a;
+    }
+    header {
+      background: #cff;
+      padding: 2em;
+      text-align: center;
+      font-family: 'Anton', sans-serif;
+    }
+    header h1 {
+      font-size: 3em;
+      margin: 0;
+      color: #007f5f;
+    }
+    header p {
+      font-size: 1.2em;
+      margin-top: 0.5em;
+    }
+    .section {
+      padding: 2em;
+      max-width: 800px;
+      margin: auto;
+    }
+    .ingredients ul {
+      list-style: none;
+      padding: 0;
+    }
+    .ingredients li::before {
+      content: "🌶️ ";
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+    form input, form select, form textarea {
+      padding: 0.5em;
+      font-size: 1em;
+    }
+    .gallery img, .gallery video {
+      max-width: 100%;
+      margin-bottom: 1em;
+      border-radius: 8px;
+    }
+    footer {
+      text-align: center;
+      padding: 1em;
+      background: #e0f7fa;
+      color: #333;
+    }
+  </style>
+  <script>
+    function checkPassword() {
+      const pw = prompt("Enter admin password:");
+      if (pw !== "BAMFwins$2025") {
+        alert("Access denied.");
+        window.location.href = "/";
+      }
+    }
+    function updateBatch() {
+      document.getElementById('nextBatch').innerText = document.getElementById('batchInput').value;
+    }
+    function updateInventory() {
+      document.getElementById('hotCount').innerText = document.getElementById('hotInput').value;
+      document.getElementById('mildCount').innerText = document.getElementById('mildInput').value;
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>BAMF SOULSA</h1>
+    <p>Bold. Local. Real. Salsa that slaps 🔥</p>
+  </header>
+
+  <section class="section ingredients">
+    <h2>Ingredients</h2>
+    <ul>
+      <li>Ripe Tomatoes (picked like they owed us money)</li>
+      <li>Sweet Onions (because crying in the kitchen is optional)</li>
+      <li>Bell Peppers (we let them crash the party)</li>
+      <li>Fresh Cilantro (don’t @ us, cilantro-haters)</li>
+      <li>Apple Cider Vinegar (for that tangy punch-in-the-tastebuds)</li>
+      <li>Hot Peppers (we mean business)</li>
+      <li>Zesty Limes (for that citrus mic drop)</li>
+      <li>Garlic (enough to ward off vampires *and* blandness)</li>
+    </ul>
+    <p><strong>Just so you know:</strong><br>
+    NO preservatives • NO GMOs • NO funky stuff (unless you count the flavor)<br>
+    YES to local love 💚 — and YES, I appreciate you! 💓</p>
+  </section>
+
+  <section class="section">
+    <h2>🔥 Next Batch Ready: <span id="nextBatch">June 10</span></h2>
+    <p>We’re cooking up the goods! Pre-order now and secure your jars.</p>
+    <p><strong>Current Availability:</strong><br>
+    Hot AF: <span id="hotCount">24</span> jars left<br>
+    Mild AF: <span id="mildCount">18</span> jars left</p>
+  </section>
+
+  <section class="section">
+    <h2>Place an Order</h2>
+    <form action="https://formspree.io/f/yourformID" method="POST">
+      <input type="text" name="name" placeholder="Your Name" required />
+      <input type="email" name="email" placeholder="Your Email" required />
+      <select name="flavor">
+        <option value="Hot AF">Hot AF</option>
+        <option value="Mild AF">Mild AF</option>
+      </select>
+      <input type="number" name="quantity" placeholder="How many jars?" min="1" />
+      <textarea name="notes" placeholder="Anything else?"></textarea>
+      <button type="submit">Send Order</button>
+    </form>
+  </section>
+
+  <section class="section">
+    <h2>Gallery</h2>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/800x400?text=Salsa+Closeup" alt="Salsa" />
+      <video controls>
+        <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+
+  <footer>
+    <p>Contact: <a href="mailto:minuswhaledude2022@gmail.com">minuswhaledude2022@gmail.com</a></p>
+    <p>Follow us on Instagram (coming soon!)</p>
+  </footer>
+
+  <!-- Admin Panel -->
+  <script>
+    if (window.location.pathname.includes("admin")) {
+      checkPassword();
+      document.getElementById("admin").style.display = "block";
+    }
+  </script>
+  <div id="admin" style="display:none">
+    <section class="section">
+      <h2>Admin Panel</h2>
+      <label>Update Next Batch Date:</label>
+      <input type="text" id="batchInput" placeholder="e.g. June 15" />
+      <button onclick="updateBatch()">Update Batch Date</button>
+      <br><br>
+      <label>Hot AF Jars Left:</label>
+      <input type="number" id="hotInput" placeholder="24" />
+      <label>Mild AF Jars Left:</label>
+      <input type="number" id="mildInput" placeholder="18" />
+      <button onclick="updateInventory()">Update Inventory</button>
+    </section>
+  </div>
+</body>
+</html>
